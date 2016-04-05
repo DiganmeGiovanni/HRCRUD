@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Departments</title>
+        
+        <h:outputStylesheet library="css" name="bootstrap.css" />
+    </h:head>
+    <h:body>
+        
+        <!-- Navigation bar -->
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+
+                <!-- Brand and toggle get grouped for better display -->
+                <div class="navbar-header">
+                    <button 
+                        type="button"
+                        class="navbar-toggle collapsed"
+                        data-toggle="collapse"
+                        data-target="#itt-collapsable-menu">
+                        <span class="fa fa-bars" />
+                    </button>
+                    <a class="navbar-brand" href="#">Creditos extra</a>
+                </div>
+
+                <!-- Nav links and other content for toggling -->
+                <div class="collapse navbar-collapse" id="itt-collapsable-menu">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="index.xhtml">Ver todos</a>
+                        </li>
+                        <li class="active">
+                            <a href="#">Crear</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Cerrar Sesión</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="container">
+            <h1>Create department</h1>
+            
+            <h:form>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6"><br/>
+                        <div class="form-group">
+                            <h:outputLabel value="# Department"></h:outputLabel>
+                            <h:inputText 
+                                id="idDepartment" 
+                                class="form-control"
+                                value="#{department.departmentId}" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6"><br/>
+                        <div class="form-group">
+                            <h:outputLabel value="Department name"></h:outputLabel>
+                            <h:inputText 
+                                id="nameDepartment" 
+                                class="form-control"
+                                value="#{department.departmentName}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6"><br/>
+                        <div class="form-group">
+                            <h:outputLabel value="Manager ID"></h:outputLabel>
+                            <h:selectOneMenu value="#{department.managerId}" class="form-control">
+                                <f:selectItems 
+                                    value="#{employees.allEmployees}"
+                                    var="employee"
+                                    itemValue="#{employee.employeeId}"
+                                    itemLabel="#{employee.fullName}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6"><br/>
+                        <div class="form-group">
+                            <h:outputLabel value="Location ID"></h:outputLabel>
+                            <h:selectOneMenu value="#{department.locationId}" class="form-control">
+                                <f:selectItems 
+                                    value="#{locations.allLocations}"
+                                    var="location"
+                                    itemValue="#{location.locationId}"
+                                    itemLabel="#{location.fullDescription}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12"><br/>
+                        <h:commandButton 
+                            action="#{department.insert()}"
+                            class="btn btn-success"
+                            value="Registrar" />
+                    </div>
+                </div>
+            </h:form>
+        </div>
+         
+        <h:outputScript library="js" name="bootstrap.min.js" />
+    </h:body>
+</html>
+

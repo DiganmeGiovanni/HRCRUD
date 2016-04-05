@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Departments</title>
+        
+        <h:outputStylesheet library="css" name="bootstrap.css" />
+    </h:head>
+    <h:body>
+        
+        <!-- Navigation bar -->
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+
+                <!-- Brand and toggle get grouped for better display -->
+                <div class="navbar-header">
+                    <button 
+                        type="button"
+                        class="navbar-toggle collapsed"
+                        data-toggle="collapse"
+                        data-target="#itt-collapsable-menu">
+                        <span class="fa fa-bars" />
+                    </button>
+                    <a class="navbar-brand" href="#">Creditos extra</a>
+                </div>
+
+                <!-- Nav links and other content for toggling -->
+                <div class="collapse navbar-collapse" id="itt-collapsable-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="#">Ver todos</a>
+                        </li>
+                        <li>
+                            <a href="create.xhtml">Crear</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Cerrar Sesión</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="container">
+            <h1>All departments</h1>
+            
+            <h:dataTable 
+                class="table table-striped table-responsive"
+                value="#{departments.allDepartments}" 
+                var="department" >
+            
+                <h:column>
+                    <f:facet name="header"># Departamento</f:facet>
+                    #{department.departmentId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Departamento</f:facet>
+                    #{department.departmentName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Manager ID</f:facet>
+                    #{department.managerId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Location ID</f:facet>
+                    #{department.locationId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">- - -</f:facet>
+                    <h:form>
+                        <h:commandButton 
+                            action="#{department.loadAndEdit}"
+                            class="btn btn-default"
+                            value="Editar">
+                            
+                            <f:setPropertyActionListener 
+                                target="#{flash.department}" 
+                                value="#{department}" />
+                        </h:commandButton>
+                    </h:form>
+                </h:column>
+            </h:dataTable>
+        </div>
+         
+        <h:outputScript library="js" name="jquery-2.2.1.min.js" />
+        <h:outputScript library="js" name="bootstrap.min.js" />
+    </h:body>
+</html>
+
